@@ -57,6 +57,8 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\AspNetUsers.sql" />
@@ -73,5 +75,12 @@
     <Build Include="Tables\Manufacturers.sql" />
     <Build Include="Tables\Models.sql" />
     <Build Include="Tables\Orders.sql" />
+    <Build Include="dbo\Tables\AspNetUserTokens.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
   </ItemGroup>
 </Project>
