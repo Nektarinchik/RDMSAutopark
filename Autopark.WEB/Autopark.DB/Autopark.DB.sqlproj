@@ -56,25 +56,10 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Tables" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\AspNetUsers.sql" />
-    <Build Include="Tables\Cars.sql" />
-    <Build Include="Tables\CarShowrooms.sql" />
-    <Build Include="Tables\CarTypes.sql" />
-    <Build Include="Tables\CustomerEmployee.sql" />
-    <Build Include="Tables\Customers.sql" />
-    <Build Include="Tables\CustomerTypes.sql" />
-    <Build Include="Tables\Discounts.sql" />
-    <Build Include="Tables\Employees.sql" />
-    <Build Include="Tables\Generations.sql" />
-    <Build Include="Tables\Logs.sql" />
-    <Build Include="Tables\Manufacturers.sql" />
-    <Build Include="Tables\Models.sql" />
-    <Build Include="Tables\Orders.sql" />
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\AspNetUserLogins.sql" />
@@ -82,5 +67,23 @@
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
     <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\Cars.sql" />
+    <Build Include="dbo\Tables\CarShowrooms.sql" />
+    <Build Include="dbo\Tables\CarTypes.sql" />
+    <Build Include="dbo\Tables\CustomerEmployee.sql" />
+    <Build Include="dbo\Tables\Customers.sql" />
+    <Build Include="dbo\Tables\CustomerTypes.sql" />
+    <Build Include="dbo\Tables\Discounts.sql" />
+    <Build Include="dbo\Tables\Employees.sql" />
+    <Build Include="dbo\Tables\Generations.sql" />
+    <Build Include="CutomerTypes_INSERT.sql" />
+    <Build Include="CustomerTypes_UPDATE.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Logs.sql" />
+    <Build Include="dbo\Tables\Manufacturers.sql" />
+    <Build Include="dbo\Tables\Models.sql" />
+    <Build Include="dbo\Tables\Orders.sql" />
   </ItemGroup>
 </Project>

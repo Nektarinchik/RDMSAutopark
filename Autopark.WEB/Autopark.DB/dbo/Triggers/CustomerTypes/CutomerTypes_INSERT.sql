@@ -12,6 +12,10 @@ BEGIN
 			'CustomerTypes_INSERT: New customer type was added with: @Title = ',
 			'"',
 			(SELECT Title FROM INSERTED),
+			'"',
+			' @Id = ',
+			'"',
+			(SELECT Id FROM INSERTED),
 			'"'
 		)
 	)

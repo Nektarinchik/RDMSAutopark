@@ -1,6 +1,6 @@
-﻿CREATE TRIGGER [CustomerTypes_UPDATE]
+﻿CREATE TRIGGER [CustomerTypes_DELETE]
 ON [dbo].[CustomerTypes]
-FOR UPDATE
+AFTER DELETE
 AS
 BEGIN
 	INSERT INTO [dbo].[Logs]
@@ -9,10 +9,14 @@ BEGIN
 		(SELECT CAST ((SELECT SESSION_CONTEXT(N'user_id')) AS INT)),
 		GETDATE(),
 		CONCAT(
-			'CustomerTypes_UPDATE: Customer Type was changed FROM @Title = ',
+			'CustomerTypes_DELETE: Customer type was deleted with: @Title = ',
+			'"',
 			(SELECT Title FROM DELETED),
-			' TO @Title = ',
-			(SELECT Title FROM INSERTED)
+			'"',
+			' @Id = ',
+			'"',
+			(SELECT Id FROM DELETED),
+			'"'
 		)
 	);
 END
