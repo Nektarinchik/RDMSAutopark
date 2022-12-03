@@ -22,5 +22,5 @@ BEGIN
 			(SELECT ModelId FROM INSERTED),
 			'"'
 		)
-	)
+	);
 END
