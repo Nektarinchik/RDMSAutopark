@@ -81,6 +81,9 @@
     <Build Include="dbo\Stored Procedures\UpdateCustomerType.sql" />
     <Build Include="dbo\Stored Procedures\InsertCustomerType.sql" />
     <Build Include="dbo\Stored Procedures\DeleteCustomerType.sql" />
+    <Build Include="Generations_INSERT.sql" />
+    <Build Include="Generations_UPDATE.sql" />
+    <Build Include="Generations_DELETE.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Logs.sql" />
