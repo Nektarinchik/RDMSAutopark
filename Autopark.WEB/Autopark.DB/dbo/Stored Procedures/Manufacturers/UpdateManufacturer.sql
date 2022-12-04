@@ -1,6 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateManufacturer]
-	@param1 int = 0,
-	@param2 int
+	@Id INT,
+	@Title NVARCHAR(40)
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	UPDATE [dbo].[Manufacturers]
+	SET Title = @Title
+	WHERE Id = @Id;
+END

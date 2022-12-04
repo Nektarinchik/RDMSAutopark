@@ -59,6 +59,13 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Stored Procedures\CustomerTypes" />
+    <Folder Include="dbo\Stored Procedures\Manufacturers" />
+    <Folder Include="dbo\Stored Procedures\Models" />
+    <Folder Include="dbo\Stored Procedures\Generations" />
+    <Folder Include="dbo\Stored Procedures\Customers" />
+    <Folder Include="dbo\Stored Procedures\Employees" />
+    <Folder Include="dbo\Stored Procedures\CarTypes" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
@@ -78,12 +85,42 @@
     <Build Include="dbo\Tables\Discounts.sql" />
     <Build Include="dbo\Tables\Employees.sql" />
     <Build Include="dbo\Tables\Generations.sql" />
-    <Build Include="dbo\Stored Procedures\UpdateCustomerType.sql" />
-    <Build Include="dbo\Stored Procedures\InsertCustomerType.sql" />
-    <Build Include="dbo\Stored Procedures\DeleteCustomerType.sql" />
     <Build Include="Generations_INSERT.sql" />
     <Build Include="Generations_UPDATE.sql" />
     <Build Include="Generations_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\CustomerTypes\DeleteCustomerType.sql" />
+    <Build Include="dbo\Stored Procedures\CustomerTypes\InsertCustomerType.sql" />
+    <Build Include="dbo\Stored Procedures\CustomerTypes\UpdateCustomerType.sql" />
+    <Build Include="dbo\Stored Procedures\Manufacturers\InsertManufacturer.sql" />
+    <Build Include="dbo\Stored Procedures\Manufacturers\UpdateManufacturer.sql" />
+    <Build Include="dbo\Stored Procedures\Manufacturers\DeleteManufacturer.sql" />
+    <Build Include="dbo\Stored Procedures\Models\InsertModel.sql" />
+    <Build Include="dbo\Stored Procedures\Models\UpdateModel.sql" />
+    <Build Include="dbo\Stored Procedures\Models\DeleteModel.sql" />
+    <Build Include="Models_INSERT.sql" />
+    <Build Include="Models_UPDATE.sql" />
+    <Build Include="Models_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Generations\InsertGeneration.sql" />
+    <Build Include="dbo\Stored Procedures\Generations\UpdateGeneration.sql" />
+    <Build Include="dbo\Stored Procedures\Generations\DeleteGeneration.sql" />
+    <Build Include="Customers_INSERT.sql" />
+    <Build Include="Customers_UPDATE.sql" />
+    <Build Include="Customers_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Customers\InsertCustomer.sql" />
+    <Build Include="dbo\Stored Procedures\Customers\UpdateCustomer.sql" />
+    <Build Include="dbo\Stored Procedures\Customers\DeleteCustomer.sql" />
+    <Build Include="Employees_INSERT.sql" />
+    <Build Include="Employees_UPDATE.sql" />
+    <Build Include="Employees_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Employees\InsertEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Employees\UpdateEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Employees\DeleteEmployee.sql" />
+    <Build Include="CarTypes_INSERT.sql" />
+    <Build Include="CarTypes_UPDATE.sql" />
+    <Build Include="CarTypes_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\CarTypes\InsertCarType.sql" />
+    <Build Include="dbo\Stored Procedures\CarTypes\UpdateCarType.sql" />
+    <Build Include="dbo\Stored Procedures\CarTypes\DeleteCarType.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Logs.sql" />

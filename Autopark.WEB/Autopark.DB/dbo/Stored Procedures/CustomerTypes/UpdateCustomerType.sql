@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[UpdateCustomerType]
-	@Id int,
+	@Id INT,
 	@Title NVARCHAR(40)
 AS
 BEGIN
