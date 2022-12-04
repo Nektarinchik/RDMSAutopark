@@ -2,7 +2,7 @@
     [Id]         INT            IDENTITY (1, 1) NOT NULL,
     [UserId]     INT            NULL,
     [LogTime]    DATETIME       NOT NULL,
-    [LogMessage] NVARCHAR (256) NOT NULL,
+    [LogMessage] NVARCHAR (MAX) NOT NULL,
     CONSTRAINT [PK_Logs_Id] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT FK_Logs_AspNetUsers_UserId FOREIGN KEY (UserId) REFERENCES AspNetUsers (Id)
 		ON DELETE SET NULL

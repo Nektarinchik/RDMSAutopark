@@ -10,37 +10,3 @@
     CONSTRAINT [FK_Cars_CarTypes_CarTypeId] FOREIGN KEY ([CarTypeId]) REFERENCES [dbo].[CarTypes] ([Id]) ON UPDATE CASCADE,
     CONSTRAINT [FK_Cars_Generations_GenerationId] FOREIGN KEY ([GenerationId]) REFERENCES [dbo].[Generations] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-
-
-GO
-CREATE TRIGGER [Cars_INSERT]
-ON [dbo].[Cars]
-AFTER INSERT
-AS
-BEGIN
-	INSERT INTO [dbo].[Logs]
-	(UserId, LogTime, LogMessage)
-	VALUES(
-		(SELECT CAST ((SELECT SESSION_CONTEXT(N'user_id')) AS INT)),
-		GETDATE(),
-		CONCAT(
-			'Cars_INSERT: Car was added with: @Id = ',
-			'"',
-			(SELECT Id FROM INSERTED),
-			'"',
-			' @CarTypeId = ',
-			'"',
-			(SELECT CarTypeId FROM INSERTED),
-			'"',
-			' @CarShowroomId = ',
-			'"',
-			(SELECT CarShowroomId FROM INSERTED),
-			'"',
-			' @GenerationId = ',
-			'"',
-			(SELECT GenerationId FROM INSERTED),
-			'"'
-		)
-	);
-END
