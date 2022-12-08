@@ -14,7 +14,7 @@ public partial class Car
     public int GenerationId { get; set; }
 
     public double? Price { get; set; }
-
+    public string Vin { get; set; } = null!;
     public virtual CarShowroom? CarShowroom { get; set; }
 
     public virtual CarType CarType { get; set; } = null!;

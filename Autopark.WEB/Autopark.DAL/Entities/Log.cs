@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autopark.DAL.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Autopark.WEB.Entities;
@@ -13,5 +14,5 @@ public partial class Log
 
     public string LogMessage { get; set; } = null!;
 
-    public virtual AspNetUser? User { get; set; }
+    public virtual CustomerUser? CustomerUser { get; set; }
 }

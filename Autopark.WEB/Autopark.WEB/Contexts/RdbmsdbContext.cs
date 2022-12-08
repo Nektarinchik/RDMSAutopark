@@ -9,15 +9,13 @@ namespace Autopark.WEB.Contexts
             : base(options)
         { }
 
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-
         public virtual DbSet<Car> Cars { get; set; }
 
         public virtual DbSet<CarShowroom> CarShowrooms { get; set; }
 
         public virtual DbSet<CarType> CarTypes { get; set; }
 
-        public virtual DbSet<Customer> Customers { get; set; }
+        //public virtual DbSet<Customer> Customers { get; set; }
 
         public virtual DbSet<CustomerEmployee> CustomerEmployees { get; set; }
 
@@ -42,14 +40,6 @@ namespace Autopark.WEB.Contexts
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
-            modelBuilder.Entity<AspNetUser>(entity =>
-            {
-                entity.Property(e => e.Email).HasMaxLength(256);
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
-                entity.Property(e => e.UserName).HasMaxLength(256);
-            });
 
             modelBuilder.Entity<Car>(entity =>
             {
@@ -81,20 +71,20 @@ namespace Autopark.WEB.Contexts
                 entity.Property(e => e.Title).HasMaxLength(40);
             });
 
-            modelBuilder.Entity<Customer>(entity =>
-            {
-                entity.HasKey(e => e.Id).HasName("PK_Customers_Id");
+            //modelBuilder.Entity<Customer>(entity =>
+            //{
+            //    entity.HasKey(e => e.Id).HasName("PK_Customers_Id");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+            //    entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.HasOne(d => d.CustomerType).WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.CustomerTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+            //    entity.HasOne(d => d.CustomerType).WithMany(p => p.Customers)
+            //        .HasForeignKey(d => d.CustomerTypeId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.IdNavigation).WithOne(p => p.Customer)
-                    .HasForeignKey<Customer>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
+            //    entity.HasOne(d => d.IdNavigation).WithOne(p => p.Customer)
+            //        .HasForeignKey<Customer>(d => d.Id)
+            //        .OnDelete(DeleteBehavior.ClientSetNull);
+            //});
 
             modelBuilder.Entity<CustomerEmployee>(entity =>
             {
@@ -102,10 +92,10 @@ namespace Autopark.WEB.Contexts
 
                 entity.ToTable("CustomerEmployee");
 
-                entity.HasIndex(e => new { e.EmployeeId, e.CustomerId }, "UQ_EmployeeId_CustomerId").IsUnique();
+                entity.HasIndex(e => new { e.EmployeeId, e.CustomerUserId }, "UQ_EmployeeId_CustomerId").IsUnique();
 
                 entity.HasOne(d => d.Customer).WithMany(p => p.CustomerEmployees)
-                    .HasForeignKey(d => d.CustomerId)
+                    .HasForeignKey(d => d.CustomerUserId)
                     .HasConstraintName("FK_CustomerEmployee_Customer_CustomerId");
 
                 entity.HasOne(d => d.Employee).WithMany(p => p.CustomerEmployees)
@@ -156,7 +146,7 @@ namespace Autopark.WEB.Contexts
                 entity.Property(e => e.LogMessage).HasMaxLength(256);
                 entity.Property(e => e.LogTime).HasColumnType("datetime");
 
-                entity.HasOne(d => d.User).WithMany(p => p.Logs)
+                entity.HasOne(d => d.CustomerUser).WithMany(p => p.Logs)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.SetNull);
             });

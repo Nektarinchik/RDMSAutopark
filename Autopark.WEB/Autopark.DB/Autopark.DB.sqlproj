@@ -66,6 +66,10 @@
     <Folder Include="dbo\Stored Procedures\Customers" />
     <Folder Include="dbo\Stored Procedures\Employees" />
     <Folder Include="dbo\Stored Procedures\CarTypes" />
+    <Folder Include="dbo\Stored Procedures\CarShowrooms" />
+    <Folder Include="dbo\Stored Procedures\Cars" />
+    <Folder Include="dbo\Stored Procedures\Discounts" />
+    <Folder Include="dbo\Stored Procedures\Orders" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
@@ -121,6 +125,30 @@
     <Build Include="dbo\Stored Procedures\CarTypes\InsertCarType.sql" />
     <Build Include="dbo\Stored Procedures\CarTypes\UpdateCarType.sql" />
     <Build Include="dbo\Stored Procedures\CarTypes\DeleteCarType.sql" />
+    <Build Include="CarShowrooms_INSERT.sql" />
+    <Build Include="CarShowrooms_UPDATE.sql" />
+    <Build Include="CarShowrooms_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\CarShowrooms\InsertCarShowroom.sql" />
+    <Build Include="dbo\Stored Procedures\CarShowrooms\UpdateCarShowroom.sql" />
+    <Build Include="dbo\Stored Procedures\CarShowrooms\DeleteCarShowroom.sql" />
+    <Build Include="Cars_INSERT.sql" />
+    <Build Include="Cars_UPDATE.sql" />
+    <Build Include="Cars_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Cars\InsertCar.sql" />
+    <Build Include="dbo\Stored Procedures\Cars\UpdateCar.sql" />
+    <Build Include="dbo\Stored Procedures\Cars\DeleteCar.sql" />
+    <Build Include="Discounts_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Discounts\InsertDiscount.sql" />
+    <Build Include="dbo\Stored Procedures\Discounts\UpdateDiscount.sql" />
+    <Build Include="dbo\Stored Procedures\Discounts\DeleteDiscount.sql" />
+    <Build Include="Discounts_DELETE.sql" />
+    <Build Include="Discounts_INSERT.sql" />
+    <Build Include="Orders_INSERT.sql" />
+    <Build Include="Orders_UPDATE.sql" />
+    <Build Include="Orders_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Orders\InsertOrder.sql" />
+    <Build Include="dbo\Stored Procedures\Orders\UpdateOrder.sql" />
+    <Build Include="dbo\Stored Procedures\Orders\DeleteOrder.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Logs.sql" />

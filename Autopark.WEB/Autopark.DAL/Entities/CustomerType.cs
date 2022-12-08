@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autopark.DAL.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Autopark.WEB.Entities;
@@ -9,5 +10,5 @@ public partial class CustomerType
 
     public string Title { get; set; } = null!;
 
-    public virtual ICollection<Customer> Customers { get; } = new List<Customer>();
+    public virtual ICollection<CustomerUser> Users { get; } = new List<CustomerUser>();
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autopark.DAL.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Autopark.WEB.Entities;
@@ -9,9 +10,9 @@ public partial class CustomerEmployee
 
     public int EmployeeId { get; set; }
 
-    public int CustomerId { get; set; }
+    public int CustomerUserId { get; set; }
 
-    public virtual Customer Customer { get; set; } = null!;
+    public virtual CustomerUser Customer { get; set; } = null!;
 
     public virtual Employee Employee { get; set; } = null!;
 

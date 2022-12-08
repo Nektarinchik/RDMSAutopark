@@ -59,4 +59,14 @@ BEGIN
 			'"'
 		)
 	);
+
+	UPDATE [dbo].[Customers]
+	SET SpendingBalance = SpendingBalance + 
+		(SELECT [dbo].[Cars].[Price] 
+		FROM INSERTED
+			INNER JOIN [dbo].[Cars] ON INSERTED.CarId = [dbo].[Cars].[Id])
+	WHERE [dbo].[Customers].[Id] = 
+		(SELECT [dbo].[CustomerEmployee].[CustomerId]
+		FROM INSERTED 
+			INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id])
 END
