@@ -3,13 +3,15 @@
 	@CarTypeId     INT,
 	@CarShowroomId INT,
 	@GenerationId  INT,
-	@Price         FLOAT
+	@Price         FLOAT,
+	@Vin           NVARCHAR(17)
 AS
 BEGIN
 	UPDATE [dbo].[Cars]
 	SET CarTypeId     = @CarTypeId,
 		CarShowroomId = @CarShowroomId,
 		GenerationId  = @GenerationId,
-		Price         = @Price
+		Price         = @Price,
+		Vin           = @Vin
 	WHERE Id = @Id;
 END

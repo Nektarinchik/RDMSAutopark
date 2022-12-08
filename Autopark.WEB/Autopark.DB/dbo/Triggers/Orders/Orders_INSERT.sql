@@ -24,7 +24,7 @@ BEGIN
 			'"',
 			' @CustomerId = ',
 			'"',
-			(SELECT [dbo].[CustomerEmployee].[CustomerId] 
+			(SELECT [dbo].[CustomerEmployee].[CustomerUserId] 
 			FROM INSERTED
 				INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id]),
 			'"',
@@ -33,7 +33,7 @@ BEGIN
 			(SELECT [dbo].[AspNetUsers].[UserName]
 			FROM INSERTED
 				INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id]
-				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerId]),
+				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerUserId]),
 			'"',
 			' @Id = ',
 			'"',
@@ -60,13 +60,13 @@ BEGIN
 		)
 	);
 
-	UPDATE [dbo].[Customers]
+	UPDATE [dbo].[AspNetUsers]
 	SET SpendingBalance = SpendingBalance + 
 		(SELECT [dbo].[Cars].[Price] 
 		FROM INSERTED
 			INNER JOIN [dbo].[Cars] ON INSERTED.CarId = [dbo].[Cars].[Id])
-	WHERE [dbo].[Customers].[Id] = 
-		(SELECT [dbo].[CustomerEmployee].[CustomerId]
+	WHERE [dbo].[AspNetUsers].[Id] = 
+		(SELECT [dbo].[CustomerEmployee].[CustomerUserId]
 		FROM INSERTED 
 			INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id])
 END

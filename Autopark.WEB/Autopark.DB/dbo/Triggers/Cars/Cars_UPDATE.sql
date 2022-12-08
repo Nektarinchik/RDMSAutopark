@@ -47,6 +47,10 @@ BEGIN
 			'"',
 			(SELECT Price FROM DELETED),
 			'"',
+			' @Vin = ',
+			'"',
+			(SELECT Vin FROM DELETED),
+			'"',
 			' TO @CarTypeId = ',
 			'"',
 			(SELECT CarTypeId FROM INSERTED),
@@ -84,6 +88,10 @@ BEGIN
 			' @Price = ',
 			'"',
 			(SELECT Price FROM INSERTED),
+			'"',
+			' @Vin = ',
+			'"',
+			(SELECT Vin FROM INSERTED),
 			'"'
 		)
 	);

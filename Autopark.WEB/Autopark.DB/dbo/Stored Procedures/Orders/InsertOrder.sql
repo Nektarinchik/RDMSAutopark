@@ -1,13 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[InsertOrder]
-	@CustomerId INT,
-	@EmployeeId INT,
-	@DiscountId INT,
-	@CarId      INT
+	@CustomerUserId INT,
+	@EmployeeId     INT,
+	@DiscountId     INT,
+	@CarId          INT
 AS
 BEGIN
 	INSERT INTO [dbo].[CustomerEmployee]
-	(CustomerId, EmployeeId)
-	VALUES(@CustomerId, @EmployeeId);
+	(CustomerUserId, EmployeeId)
+	VALUES(@CustomerUserId, @EmployeeId);
 
 	DECLARE @CustomerEmployeeId INT = SCOPE_IDENTITY();
 

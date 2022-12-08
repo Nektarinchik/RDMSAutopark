@@ -46,6 +46,10 @@ BEGIN
 			' @Price = ',
 			'"',
 			(SELECT Price FROM DELETED),
+			'"',
+			' @Vin = ',
+			'"',
+			(SELECT Vin FROM DELETED),
 			'"'
 		)
 	);
