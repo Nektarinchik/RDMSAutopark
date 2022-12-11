@@ -63,7 +63,6 @@
     <Folder Include="dbo\Stored Procedures\Manufacturers" />
     <Folder Include="dbo\Stored Procedures\Models" />
     <Folder Include="dbo\Stored Procedures\Generations" />
-    <Folder Include="dbo\Stored Procedures\Employees" />
     <Folder Include="dbo\Stored Procedures\CarTypes" />
     <Folder Include="dbo\Stored Procedures\CarShowrooms" />
     <Folder Include="dbo\Stored Procedures\Cars" />
@@ -76,7 +75,6 @@
     <Folder Include="dbo\Triggers\CarShowrooms" />
     <Folder Include="dbo\Triggers\CarTypes" />
     <Folder Include="dbo\Triggers\Discounts" />
-    <Folder Include="dbo\Triggers\Employees" />
     <Folder Include="dbo\Triggers\Generations" />
     <Folder Include="dbo\Triggers\Models" />
     <Folder Include="dbo\Triggers\Orders" />
@@ -109,9 +107,6 @@
     <Build Include="dbo\Stored Procedures\Generations\InsertGeneration.sql" />
     <Build Include="dbo\Stored Procedures\Generations\UpdateGeneration.sql" />
     <Build Include="dbo\Stored Procedures\Generations\DeleteGeneration.sql" />
-    <Build Include="dbo\Stored Procedures\Employees\InsertEmployee.sql" />
-    <Build Include="dbo\Stored Procedures\Employees\UpdateEmployee.sql" />
-    <Build Include="dbo\Stored Procedures\Employees\DeleteEmployee.sql" />
     <Build Include="dbo\Stored Procedures\CarTypes\InsertCarType.sql" />
     <Build Include="dbo\Stored Procedures\CarTypes\UpdateCarType.sql" />
     <Build Include="dbo\Stored Procedures\CarTypes\DeleteCarType.sql" />

@@ -24,7 +24,7 @@ BEGIN
 			'"',
 			' @CustomerId = ',
 			'"',
-			(SELECT [dbo].[CustomerEmployee].[CustomerUserId] 
+			(SELECT [dbo].[CustomerEmployee].[CustomerId] 
 			FROM DELETED
 				INNER JOIN [dbo].[CustomerEmployee] ON DELETED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id]),
 			'"',
@@ -33,7 +33,7 @@ BEGIN
 			(SELECT [dbo].[AspNetUsers].[UserName]
 			FROM DELETED
 				INNER JOIN [dbo].[CustomerEmployee] ON DELETED.CustomerEmployeeId  = [dbo].[CustomerEmployee].[Id]
-				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerUserId]),
+				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerId]),
 			'"',
 			' @DiscountId = ',
 			'"',
@@ -68,7 +68,7 @@ BEGIN
 			'"',
 			' @CustomerId = ',
 			'"',
-			(SELECT [dbo].[CustomerEmployee].[CustomerUserId] 
+			(SELECT [dbo].[CustomerEmployee].[CustomerId] 
 			FROM INSERTED
 				INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id]),
 			'"',
@@ -77,7 +77,7 @@ BEGIN
 			(SELECT [dbo].[AspNetUsers].[UserName]
 			FROM INSERTED
 				INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id]
-				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerUserId]),
+				INNER JOIN [dbo].[AspNetUsers]      ON [dbo].[AspNetUsers].[Id]    = [dbo].[CustomerEmployee].[CustomerId]),
 			'"',
 			' @Id = ',
 			'"',
