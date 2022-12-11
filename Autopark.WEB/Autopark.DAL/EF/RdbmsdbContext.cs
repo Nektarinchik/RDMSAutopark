@@ -1,7 +1,7 @@
 ﻿using Autopark.WEB.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Autopark.WEB.Contexts
+namespace Autopark.DAL.EF
 {
     public partial class RdbmsdbContext : AppDbContext
     {

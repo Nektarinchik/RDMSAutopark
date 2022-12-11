@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Autopark.WEB.Contexts
+namespace Autopark.DAL.EF
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
