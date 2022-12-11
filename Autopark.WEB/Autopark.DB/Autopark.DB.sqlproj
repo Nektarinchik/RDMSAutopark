@@ -96,7 +96,6 @@
     <Build Include="dbo\Tables\CustomerEmployee.sql" />
     <Build Include="dbo\Tables\CustomerTypes.sql" />
     <Build Include="dbo\Tables\Discounts.sql" />
-    <Build Include="dbo\Tables\Employees.sql" />
     <Build Include="dbo\Tables\Generations.sql" />
     <Build Include="dbo\Stored Procedures\CustomerTypes\DeleteCustomerType.sql" />
     <Build Include="dbo\Stored Procedures\CustomerTypes\InsertCustomerType.sql" />
@@ -146,9 +145,6 @@
     <Build Include="dbo\Triggers\Discounts\Discounts_DELETE.sql" />
     <Build Include="dbo\Triggers\Discounts\Discounts_INSERT.sql" />
     <Build Include="dbo\Triggers\Discounts\Discounts_UPDATE.sql" />
-    <Build Include="dbo\Triggers\Employees\Employees_DELETE.sql" />
-    <Build Include="dbo\Triggers\Employees\Employees_INSERT.sql" />
-    <Build Include="dbo\Triggers\Employees\Employees_UPDATE.sql" />
     <Build Include="dbo\Triggers\Generations\Generations_UPDATE.sql" />
     <Build Include="dbo\Triggers\Generations\Generations_INSERT.sql" />
     <Build Include="dbo\Triggers\Generations\Generations_DELETE.sql" />

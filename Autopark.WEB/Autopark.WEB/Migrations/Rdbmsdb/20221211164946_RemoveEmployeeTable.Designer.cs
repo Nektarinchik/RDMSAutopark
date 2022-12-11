@@ -4,6 +4,7 @@ using Autopark.WEB.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autopark.WEB.Migrations.Rdbmsdb
 {
     [DbContext(typeof(RdbmsdbContext))]
-    partial class RdbmsdbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211164946_RemoveEmployeeTable")]
+    partial class RemoveEmployeeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

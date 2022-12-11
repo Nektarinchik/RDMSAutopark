@@ -11,7 +11,7 @@ builder.Services.AddDbContext<RdbmsdbContext>(options =>
     options.UseSqlServer(connectionString));
 
 
-builder.Services.AddIdentity<CustomerUser, IdentityRole<int>>(
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
     options =>
         {
             options.SignIn.RequireConfirmedAccount = false;

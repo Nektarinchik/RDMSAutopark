@@ -10,5 +10,5 @@ public partial class CustomerType
 
     public string Title { get; set; } = null!;
 
-    public virtual ICollection<CustomerUser> Users { get; } = new List<CustomerUser>();
+    public virtual ICollection<ApplicationUser> Users { get; } = new List<ApplicationUser>();
 }

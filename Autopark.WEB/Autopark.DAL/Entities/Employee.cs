@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Autopark.WEB.Entities;
 
-public partial class Employee
+public partial class Employdee
 {
     public int Id { get; set; }
 
@@ -14,5 +14,5 @@ public partial class Employee
 
     public virtual ICollection<CustomerEmployee> CustomerEmployees { get; } = new List<CustomerEmployee>();
 
-    public virtual CustomerUser IdNavigation { get; set; } = null!;
+    public virtual ApplicationUser IdNavigation { get; set; } = null!;
 }

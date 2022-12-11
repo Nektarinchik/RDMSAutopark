@@ -23,8 +23,6 @@ namespace Autopark.WEB.Contexts
 
         public virtual DbSet<Discount> Discounts { get; set; }
 
-        public virtual DbSet<Employee> Employees { get; set; }
-
         public virtual DbSet<Generation> Generations { get; set; }
 
         public virtual DbSet<Log> Logs { get; set; }
@@ -92,13 +90,13 @@ namespace Autopark.WEB.Contexts
 
                 entity.ToTable("CustomerEmployee");
 
-                entity.HasIndex(e => new { e.EmployeeId, e.CustomerUserId }, "UQ_EmployeeId_CustomerId").IsUnique();
+                entity.HasIndex(e => new { e.EmployeeId, e.CustomerId }, "UQ_EmployeeId_CustomerId").IsUnique();
 
-                entity.HasOne(d => d.Customer).WithMany(p => p.CustomerEmployees)
-                    .HasForeignKey(d => d.CustomerUserId)
+                entity.HasOne(d => d.Customer).WithMany("CustomerEmployees1")
+                    .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK_CustomerEmployee_Customer_CustomerId");
 
-                entity.HasOne(d => d.Employee).WithMany(p => p.CustomerEmployees)
+                entity.HasOne(d => d.Employee).WithMany("CustomerEmployees2")
                     .HasForeignKey(d => d.EmployeeId)
                     .HasConstraintName("FK_CustomerEmployee_Employee_EmployeeId");
             });
@@ -115,19 +113,6 @@ namespace Autopark.WEB.Contexts
                 entity.HasKey(e => e.Id).HasName("PK_Discounts_Id");
 
                 entity.Property(e => e.Title).HasMaxLength(40);
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.HasKey(e => e.Id).HasName("PK_Employees_Id");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-                entity.Property(e => e.EndDate).HasColumnType("date");
-                entity.Property(e => e.StartDate).HasColumnType("date");
-
-                entity.HasOne(d => d.IdNavigation).WithOne(p => p.Employee)
-                    .HasForeignKey<Employee>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Generation>(entity =>

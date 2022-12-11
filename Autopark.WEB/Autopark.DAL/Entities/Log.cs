@@ -14,5 +14,5 @@ public partial class Log
 
     public string LogMessage { get; set; } = null!;
 
-    public virtual CustomerUser? CustomerUser { get; set; }
+    public virtual ApplicationUser? CustomerUser { get; set; }
 }

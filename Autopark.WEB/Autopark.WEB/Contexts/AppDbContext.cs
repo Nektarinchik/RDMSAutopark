@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.WEB.Contexts
 {
-    public class AppDbContext : IdentityDbContext<CustomerUser, IdentityRole<int>, int>
+    public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -21,7 +21,7 @@ namespace Autopark.WEB.Contexts
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            builder.Entity<CustomerUser>(entity =>
+            builder.Entity<ApplicationUser>(entity =>
             {
                 entity.HasOne(au => au.CustomerType).WithMany(p => p.Users)
                     .HasForeignKey(d => d.CustomerTypeId)

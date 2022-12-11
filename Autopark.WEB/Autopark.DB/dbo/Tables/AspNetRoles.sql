@@ -3,8 +3,12 @@
     [Name]             NVARCHAR (256) NULL,
     [NormalizedName]   NVARCHAR (256) NULL,
     [ConcurrencyStamp] NVARCHAR (MAX) NULL,
+    [EndDate]          DATETIME2 (7)  NULL,
+    [StartDate]        DATETIME2 (7)  NULL,
     CONSTRAINT [PK_AspNetRoles] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO

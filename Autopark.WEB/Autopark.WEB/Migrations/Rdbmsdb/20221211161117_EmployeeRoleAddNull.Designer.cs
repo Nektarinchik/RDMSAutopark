@@ -4,6 +4,7 @@ using Autopark.WEB.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autopark.WEB.Migrations.Rdbmsdb
 {
     [DbContext(typeof(RdbmsdbContext))]
-    partial class RdbmsdbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211161117_EmployeeRoleAddNull")]
+    partial class EmployeeRoleAddNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Autopark.DAL.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Autopark.DAL.Entities.CustomerUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -226,10 +228,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ApplicationUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("CustomerUserId")
                         .HasColumnType("int");
 
                     b.Property<int>("EmployeeId")
@@ -238,11 +237,9 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                     b.HasKey("Id")
                         .HasName("PK_CustomerEmployee_Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("CustomerUserId");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex(new[] { "EmployeeId", "CustomerId" }, "UQ_EmployeeId_CustomerId")
+                    b.HasIndex(new[] { "EmployeeId", "CustomerUserId" }, "UQ_EmployeeId_CustomerId")
                         .IsUnique();
 
                     b.ToTable("CustomerEmployee", (string)null);
@@ -287,6 +284,23 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                         .HasName("PK_Discounts_Id");
 
                     b.ToTable("Discounts");
+                });
+
+            modelBuilder.Entity("Autopark.WEB.Entities.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Employees_Id");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Generation", b =>
@@ -518,7 +532,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Autopark.DAL.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Autopark.DAL.Entities.CustomerUser", b =>
                 {
                     b.HasOne("Autopark.WEB.Entities.CustomerType", "CustomerType")
                         .WithMany("Users")
@@ -555,19 +569,15 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Autopark.WEB.Entities.CustomerEmployee", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", "Customer")
                         .WithMany("CustomerEmployees")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", "Customer")
-                        .WithMany("CustomerEmployees1")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("CustomerUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_CustomerEmployee_Customer_CustomerId");
 
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", "Employee")
-                        .WithMany("CustomerEmployees2")
+                    b.HasOne("Autopark.WEB.Entities.Employee", "Employee")
+                        .WithMany("CustomerEmployees")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -576,6 +586,16 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Autopark.WEB.Entities.Employee", b =>
+                {
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", "IdNavigation")
+                        .WithOne("Employee")
+                        .HasForeignKey("Autopark.WEB.Entities.Employee", "Id")
+                        .IsRequired();
+
+                    b.Navigation("IdNavigation");
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Generation", b =>
@@ -591,7 +611,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Autopark.WEB.Entities.Log", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", "CustomerUser")
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", "CustomerUser")
                         .WithMany("Logs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
@@ -645,7 +665,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -654,7 +674,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -669,7 +689,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -678,20 +698,18 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    b.HasOne("Autopark.DAL.Entities.CustomerUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Autopark.DAL.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Autopark.DAL.Entities.CustomerUser", b =>
                 {
                     b.Navigation("CustomerEmployees");
 
-                    b.Navigation("CustomerEmployees1");
-
-                    b.Navigation("CustomerEmployees2");
+                    b.Navigation("Employee");
 
                     b.Navigation("Logs");
                 });
@@ -724,6 +742,11 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
             modelBuilder.Entity("Autopark.WEB.Entities.Discount", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Autopark.WEB.Entities.Employee", b =>
+                {
+                    b.Navigation("CustomerEmployees");
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Generation", b =>
