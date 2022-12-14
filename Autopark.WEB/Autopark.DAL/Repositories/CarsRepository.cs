@@ -17,18 +17,18 @@ namespace Autopark.DAL.Repositories
         {
             _context = context;
         }
-        public void Create(Car entity)
+        public async Task Create(Car entity)
         {
-            _ = _context.Cars.FromSqlInterpolated(
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC InsertCar 
                 {entity.CarTypeId}, {entity.CarShowroomId}, 
                 {entity.GenerationId}, {entity.Price}, {entity.Vin}");
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _ = _context.Cars.FromSqlInterpolated(
-                $@"EXEC DeleteCar {id}");
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
+                    $@"EXEC DeleteCar {id}"); 
         }
 
         public IEnumerable<Car> GetAll()
@@ -50,9 +50,9 @@ namespace Autopark.DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void Update(Car entity)
+        public async Task Update(Car entity)
         {
-            _ = _context.Cars.FromSqlInterpolated(
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC UpdateCar 
                 {entity.Id}, {entity.CarTypeId}, {entity.CarShowroomId},
                 {entity.GenerationId}, {entity.Price}, {entity.Vin}");

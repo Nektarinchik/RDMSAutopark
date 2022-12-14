@@ -23,7 +23,7 @@ namespace Autopark.WEB.Controllers
         // GET: CarShowrooms
         public IActionResult Index()
         {
-              return View(_carShowroomsRepository.GetAll());
+              return View(_unitOfWork.CarShowroomsRepository.GetAll());
         }
 
         // GET: CarShowrooms/Details/5
@@ -34,7 +34,7 @@ namespace Autopark.WEB.Controllers
                 return NotFound();
             }
 
-            var carShowroom = await _carShowroomsRepository.GetByIdAsync(id.Value);
+            var carShowroom = await _unitOfWork.CarShowroomsRepository.GetByIdAsync(id.Value);
             if (carShowroom == null)
             {
                 return NotFound();
@@ -58,11 +58,9 @@ namespace Autopark.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                _carShowroomsRepository.Create(carShowroom);
-                await
-                //_context.Add(carShowroom);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                await _unitOfWork.CarShowroomsRepository.Create(carShowroom);
+                await _unitOfWork.SaveAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(carShowroom);
         }
@@ -70,12 +68,12 @@ namespace Autopark.WEB.Controllers
         // GET: CarShowrooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.CarShowrooms == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var carShowroom = await _context.CarShowrooms.FindAsync(id);
+            var carShowroom = await _unitOfWork.CarShowroomsRepository.GetByIdAsync(id.Value);
             if (carShowroom == null)
             {
                 return NotFound();
@@ -97,22 +95,7 @@ namespace Autopark.WEB.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(carShowroom);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CarShowroomExists(carShowroom.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _unitOfWork.CarShowroomsRepository.Update(carShowroom);
                 return RedirectToAction(nameof(Index));
             }
             return View(carShowroom);
@@ -121,13 +104,12 @@ namespace Autopark.WEB.Controllers
         // GET: CarShowrooms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.CarShowrooms == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var carShowroom = await _context.CarShowrooms
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var carShowroom = await _unitOfWork.CarShowroomsRepository.GetByIdAsync(id.Value);
             if (carShowroom == null)
             {
                 return NotFound();
@@ -141,23 +123,15 @@ namespace Autopark.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.CarShowrooms == null)
-            {
-                return Problem("Entity set 'RdbmsdbContext.CarShowrooms'  is null.");
-            }
-            var carShowroom = await _context.CarShowrooms.FindAsync(id);
+
+            var carShowroom = await _unitOfWork.CarShowroomsRepository.GetByIdAsync(id);
             if (carShowroom != null)
             {
-                _context.CarShowrooms.Remove(carShowroom);
+                await _unitOfWork.CarShowroomsRepository.Delete(id);
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarShowroomExists(int id)
-        {
-          return _context.CarShowrooms.Any(e => e.Id == id);
-        }
     }
 }

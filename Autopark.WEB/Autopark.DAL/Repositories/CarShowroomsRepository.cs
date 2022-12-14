@@ -1,6 +1,7 @@
 ﻿using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
@@ -12,17 +13,17 @@ namespace Autopark.DAL.Repositories
         {
             _context = context;
         }
-        public void Create(CarShowroom entity)
+        public async Task Create(CarShowroom entity)
         {
-            _ = _context.CarShowrooms.FromSqlInterpolated(
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC InsertCarShowroom 
                 {entity.Title}, {entity.Rating}, {entity.Phone}");
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _ = _context.CarShowrooms.FromSqlInterpolated(
-                $@"EXEC DeleteCarShowroom {id}");
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteCarShowroom {id}");          
         }
 
         public IEnumerable<CarShowroom> GetAll()
@@ -43,9 +44,9 @@ namespace Autopark.DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void Update(CarShowroom entity)
+        public async Task Update(CarShowroom entity)
         {
-            _ = _context.CarShowrooms.FromSqlInterpolated(
+            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC UpdateCarShowroom 
                 {entity.Id}, {entity.Title}, {entity.Rating}, {entity.Phone}");
         }

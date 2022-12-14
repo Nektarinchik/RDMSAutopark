@@ -39,5 +39,20 @@ namespace Autopark.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task IRepository<CustomerEmployee>.Create(CustomerEmployee entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<CustomerEmployee>.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<CustomerEmployee>.Update(CustomerEmployee entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
