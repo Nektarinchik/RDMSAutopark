@@ -32,7 +32,13 @@ namespace Autopark.DAL.EF
         public virtual DbSet<Model> Models { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=DESKTOP-G9GG5EN;Database=RDBMSDb;TrustServerCertificate=True;User ID=nikita;Password=nikita;");
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
