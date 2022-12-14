@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") 
+    ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
 
 builder.Services.AddDbContext<RdbmsdbContext>(options =>
@@ -13,14 +14,13 @@ builder.Services.AddDbContext<RdbmsdbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
     options =>
-        {
-            options.SignIn.RequireConfirmedAccount = false;
-            options.Password.RequireLowercase = false;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = false;
-            options.Password.RequireDigit = false;
-        }
-    )
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireDigit = false;
+    })
     .AddEntityFrameworkStores<RdbmsdbContext>()
     //.AddDefaultUI()
     .AddDefaultTokenProviders();

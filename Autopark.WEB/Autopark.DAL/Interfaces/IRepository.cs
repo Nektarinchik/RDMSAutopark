@@ -4,10 +4,10 @@
         where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
-        TEntity? GetById(int id);
+        Task<TEntity?> GetByIdAsync(int id);
         void Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(int id);
-        Task Save();
+        Task SaveAsync();
     }
 }

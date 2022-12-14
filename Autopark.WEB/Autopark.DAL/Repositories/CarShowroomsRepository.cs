@@ -16,33 +16,29 @@ namespace Autopark.DAL.Repositories
         {
             _ = _context.CarShowrooms.FromSqlInterpolated(
                 $@"EXEC InsertCarShowroom 
-                {entity.Title}, {entity.Rating}, {entity.Phone}
-                ");
+                {entity.Title}, {entity.Rating}, {entity.Phone}");
         }
 
         public void Delete(int id)
         {
             _ = _context.CarShowrooms.FromSqlInterpolated(
-                $@"EXEC DeleteCarShowroom {id}
-                ");
+                $@"EXEC DeleteCarShowroom {id}");
         }
 
         public IEnumerable<CarShowroom> GetAll()
         {
             return _context.CarShowrooms.FromSqlRaw(
-                @"SELECT * FROM [dbo].[CarShowrooms]
-                ");
+                "SELECT * FROM [dbo].[CarShowrooms]");
         }
 
-        public CarShowroom? GetById(int id)
+        public Task<CarShowroom?> GetByIdAsync(int id)
         {
             return _context.CarShowrooms.FromSqlInterpolated(
                 $@"SELECT * FROM [dbo].[CarShowrooms] 
-                   WHERE Id = {id}
-                ").FirstOrDefault();
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
