@@ -3,6 +3,7 @@ using Autopark.DAL.Repositories;
 using Autopark.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Autopark.DAL.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") 
@@ -11,6 +12,19 @@ var connectionString = builder.Configuration.GetConnectionString("AppDbContextCo
 
 builder.Services.AddDbContext<RdbmsdbContext>(options =>
     options.UseSqlServer(connectionString));
+
+// Add repositories
+builder.Services.AddScoped<ICarShowroomsRepository, CarShowroomsRepository>();
+builder.Services.AddScoped<ICarsRepository, CarsRepository>();
+builder.Services.AddScoped<ICustomerEmployeeRepository, CustomerEmployeeRepository>();
+builder.Services.AddScoped<ICustomerTypesRepository, CustomerTypesRepository>();
+builder.Services.AddScoped<IDiscountsRepository, DiscountsRepository>();
+builder.Services.AddScoped<IGenerationsRepository, GenerationsRepository>();
+builder.Services.AddScoped<ILogsRepository, LogsRepository>();
+builder.Services.AddScoped<IManufacturersRepository, ManufacturersRepository>();
+builder.Services.AddScoped<IModelsRepository, ModelsRepository>();
+builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
