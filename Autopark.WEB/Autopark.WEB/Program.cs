@@ -1,5 +1,6 @@
 using Autopark.DAL.EF;
-using Autopark.DAL.Entities;
+using Autopark.DAL.Repositories;
+using Autopark.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
