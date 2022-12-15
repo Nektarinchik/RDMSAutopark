@@ -13,5 +13,5 @@ public partial class Model
 
     public virtual ICollection<Generation> Generations { get; } = new List<Generation>();
 
-    public virtual Manufacturer Manufacturer { get; set; } = null!;
+    public virtual Manufacturer? Manufacturer { get; set; }
 }
