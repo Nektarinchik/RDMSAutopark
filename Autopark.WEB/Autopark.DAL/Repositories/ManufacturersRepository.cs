@@ -1,53 +1,51 @@
-﻿using Autopark.DAL.Interfaces;
+﻿using Autopark.DAL.EF;
+using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class ManufacturersRepository : IManufacturersRepository
     {
-        public void Create(Manufacturer entity)
+        private readonly RdbmsdbContext _context;
+        public ManufacturersRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public IEnumerable<Manufacturer> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Manufacturers.FromSqlRaw(
+                $@"SELECT * FROM [dbo].[Manufacturers]");
         }
 
         public Task<Manufacturer?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.Manufacturers.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[Manufacturers]
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
+        }
+        public async Task Create(Manufacturer entity)
+        {
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC InsertManufacturer {entity.Title}");
         }
 
-        public void Update(Manufacturer entity)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteManufacturer {id}");
         }
 
-        Task IRepository<Manufacturer>.Create(Manufacturer entity)
+        public async Task Update(Manufacturer entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Manufacturer>.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Manufacturer>.Update(Manufacturer entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC UpdateManufacturer {entity.Id}, {entity.Title}");
         }
     }
 }
