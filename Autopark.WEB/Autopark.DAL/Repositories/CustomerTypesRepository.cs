@@ -1,54 +1,53 @@
 ﻿
+using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class CustomerTypesRepository : ICustomerTypesRepository
     {
-        public void Create(CustomerType entity)
+        private readonly RdbmsdbContext _context;
+        public CustomerTypesRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public IEnumerable<CustomerType> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.CustomerTypes.FromSqlRaw(
+                "SELECT * FROM [dbo].[CustomerTypes]");
         }
 
         public Task<CustomerType?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.CustomerTypes.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[CustomerTypes]
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(CustomerType entity)
+        public async Task Create(CustomerType entity)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $"EXEC InsertCustomerType {entity.Title}");
         }
 
-        Task IRepository<CustomerType>.Create(CustomerType entity)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $"EXEC DeleteCustomerType {id}");
         }
 
-        Task IRepository<CustomerType>.Delete(int id)
+        public async Task Update(CustomerType entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<CustomerType>.Update(CustomerType entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $"EXEC UpdateCustomerType {entity.Id}, {entity.Title}");
         }
     }
 }
