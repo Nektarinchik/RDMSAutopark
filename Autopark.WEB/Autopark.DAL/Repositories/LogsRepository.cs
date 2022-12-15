@@ -24,7 +24,7 @@ namespace Autopark.DAL.Repositories
         {
             return _context.Logs.FromSqlInterpolated(
                 $@"SELECT * FROM [dbo].[Logs]
-                WHERE Id = 50").FirstOrDefaultAsync();
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
     }
 }

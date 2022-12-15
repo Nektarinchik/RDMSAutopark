@@ -7,39 +7,54 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Autopark.DAL.EF;
 using Autopark.WEB.Entities;
+using Autopark.DAL.Interfaces;
 
 namespace Autopark.WEB.Controllers
 {
     public class LogsController : Controller
     {
-        private readonly RdbmsdbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LogsController(RdbmsdbContext context)
+        public LogsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Logs
         public async Task<IActionResult> Index()
         {
-            var rdbmsdbContext = _context.Logs.Include(l => l.CustomerUser);
-            return View(await rdbmsdbContext.ToListAsync());
+            var logs = _unitOfWork.LogsRepository.GetAll();
+            foreach (var log in logs)
+            {
+                if (log.UserId.HasValue)
+                {
+                    log.CustomerUser = await _unitOfWork.ApplicationUserRepository.
+                        GetByIdAsync(log.UserId.Value);
+                }
+            }
+            return View(logs);
         }
 
         // GET: Logs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Logs == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var log = await _context.Logs
-                .Include(l => l.CustomerUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var log = await _unitOfWork.LogsRepository.
+                GetByIdAsync(id.Value);
             if (log == null)
             {
                 return NotFound();
+            }
+
+            if (log.UserId.HasValue)
+            {
+                log.CustomerUser = await _unitOfWork.ApplicationUserRepository.
+                    GetByIdAsync(log.UserId.Value);
+                ViewData["UserName"] = log.CustomerUser?.UserName;
             }
 
             return View(log);
