@@ -24,6 +24,7 @@ builder.Services.AddScoped<ILogsRepository, LogsRepository>();
 builder.Services.AddScoped<IManufacturersRepository, ManufacturersRepository>();
 builder.Services.AddScoped<IModelsRepository, ModelsRepository>();
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddScoped<ICarTypesRepository, CarTypesRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
