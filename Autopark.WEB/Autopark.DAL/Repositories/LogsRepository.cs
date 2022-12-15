@@ -1,54 +1,30 @@
 ﻿
+using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class LogsRepository : ILogsRepository
     {
-        public void Create(Log entity)
+        private readonly RdbmsdbContext _context;
+        public LogsRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public IEnumerable<Log> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Logs.FromSqlRaw(
+                "SELECT * FROM [dbo].[Logs]");
         }
 
         public Task<Log?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Log entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Log>.Create(Log entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Log>.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Log>.Update(Log entity)
-        {
-            throw new NotImplementedException();
+            return _context.Logs.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[Logs]
+                WHERE Id = 50").FirstOrDefaultAsync();
         }
     }
 }

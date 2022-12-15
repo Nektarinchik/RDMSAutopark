@@ -2,7 +2,7 @@
 
 namespace Autopark.DAL.Interfaces
 {
-    public interface ILogsRepository : IRepository<Log>
+    public interface ILogsRepository : IReadOnlyRepository<Log>
     {
     }
 }

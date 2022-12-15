@@ -1,54 +1,52 @@
 ﻿
+using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class DiscountsRepository : IDiscountsRepository
     {
-        public void Create(Discount entity)
+        private readonly RdbmsdbContext _context;
+        public DiscountsRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public IEnumerable<Discount> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Discounts.FromSqlRaw(
+                "SELECT * FROM [dbo].[Discounts]");
         }
 
         public Task<Discount?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.Discounts.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[Discounts]
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
+        }
+        public async Task Create(Discount entity)
+        {
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC InsertDiscount {entity.Title}, {entity.Value}");
         }
 
-        public void Update(Discount entity)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteDiscount {id}");
         }
 
-        Task IRepository<Discount>.Create(Discount entity)
+        public async Task Update(Discount entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Discount>.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Discount>.Update(Discount entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC UpdateDiscount {entity.Id}, {entity.Title}, {entity.Value}");
         }
     }
 }
