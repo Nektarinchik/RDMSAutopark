@@ -19,7 +19,7 @@ namespace Autopark.DAL.Repositories
         }
         public async Task Create(Car entity)
         {
-            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
+            await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC InsertCar 
                 {entity.CarTypeId}, {entity.CarShowroomId}, 
                 {entity.GenerationId}, {entity.Price}, {entity.Vin}");
@@ -27,8 +27,8 @@ namespace Autopark.DAL.Repositories
 
         public async Task Delete(int id)
         {
-            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
-                    $@"EXEC DeleteCar {id}"); 
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteCar {id}"); 
         }
 
         public IEnumerable<Car> GetAll()
