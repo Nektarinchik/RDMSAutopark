@@ -13,5 +13,5 @@ public partial class Generation
 
     public virtual ICollection<Car> Cars { get; } = new List<Car>();
 
-    public virtual Model Model { get; set; } = null!;
+    public virtual Model? Model { get; set; }
 }

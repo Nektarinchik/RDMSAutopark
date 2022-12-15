@@ -1,54 +1,54 @@
 ﻿
+using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class GenerationsRepository : IGenerationsRepository
     {
-        public void Create(Generation entity)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly RdbmsdbContext _context;
 
-        public void Delete(int id)
+        public GenerationsRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public IEnumerable<Generation> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Generations.FromSqlRaw(
+                "SELECT * FROM [dbo].[Generations]");
         }
 
         public Task<Generation?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.Generations.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[Generations]
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Generation entity)
+        public async Task Create(Generation entity)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $"EXEC InsertGeneration {entity.ModelId}, {entity.Title}");
         }
 
-        Task IRepository<Generation>.Create(Generation entity)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteGeneration {id}");
         }
 
-        Task IRepository<Generation>.Delete(int id)
+        public async Task Update(Generation entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Generation>.Update(Generation entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $"EXEC UpdateGeneration {entity.Id}, {entity.ModelId}, {entity.Title}");
         }
     }
 }

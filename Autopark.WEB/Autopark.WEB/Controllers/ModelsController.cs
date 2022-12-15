@@ -25,7 +25,8 @@ namespace Autopark.WEB.Controllers
             var models = _unitOfWork.ModelsRepository.GetAll();
             foreach (var model in models)
             {
-                model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId);
+                model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId) ??
+                    new Manufacturer();
             }
             return View(models);
         }
@@ -43,7 +44,8 @@ namespace Autopark.WEB.Controllers
                 return NotFound();
             }
 
-            model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId);
+            model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId) ??
+                new Manufacturer();
 
             return View(model);
         }
@@ -127,7 +129,8 @@ namespace Autopark.WEB.Controllers
             {
                 return NotFound();
             }
-            model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId);
+            model.Manufacturer = await _unitOfWork.ManufacturersRepository.GetByIdAsync(model.ManufacturerId) ??
+                new Manufacturer();
 
             return View(model);
         }
