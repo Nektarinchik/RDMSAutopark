@@ -6,7 +6,7 @@
     [Date]               DATE NOT NULL,
     CONSTRAINT [PK_Orders_Id] PRIMARY KEY CLUSTERED ([Id] ASC),
     CHECK ([Date]<=getdate()),
-    CONSTRAINT [FK_Orders_Cars_CarId] FOREIGN KEY ([CarId]) REFERENCES [dbo].[Cars] ([Id]) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT [FK_Orders_Cars_CarId] FOREIGN KEY ([CarId]) REFERENCES [dbo].[Cars] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT [FK_Orders_CustomerEmployee_CustomerEmployeeId] FOREIGN KEY ([CustomerEmployeeId]) REFERENCES [dbo].[CustomerEmployee] ([Id]) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT [FK_Orders_Discounts_DiscountId] FOREIGN KEY ([DiscountId]) REFERENCES [dbo].[Discounts] ([Id]) ON DELETE SET NULL ON UPDATE CASCADE
 );

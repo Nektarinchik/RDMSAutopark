@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Autopark.DAL.EF;
 using Autopark.WEB.Entities;
 using Autopark.DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Autopark.WEB.Controllers
 {
@@ -20,12 +21,15 @@ namespace Autopark.WEB.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize(Roles = "admin, employee, customer")]
+
         // GET: CarShowrooms
         public IActionResult Index()
         {
               return View(_unitOfWork.CarShowroomsRepository.GetAll());
         }
 
+        [Authorize(Roles = "admin, employee, customer")]
         // GET: CarShowrooms/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,11 +47,15 @@ namespace Autopark.WEB.Controllers
             return View(carShowroom);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: CarShowrooms/Create
         public IActionResult Create()
         {
             return View();
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: CarShowrooms/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -65,6 +73,8 @@ namespace Autopark.WEB.Controllers
             return View(carShowroom);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: CarShowrooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,6 +90,8 @@ namespace Autopark.WEB.Controllers
             }
             return View(carShowroom);
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: CarShowrooms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -101,6 +113,8 @@ namespace Autopark.WEB.Controllers
             return View(carShowroom);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: CarShowrooms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -117,6 +131,8 @@ namespace Autopark.WEB.Controllers
 
             return View(carShowroom);
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: CarShowrooms/Delete/5
         [HttpPost, ActionName("Delete")]

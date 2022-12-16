@@ -9,9 +9,12 @@ using Autopark.DAL.EF;
 using Autopark.WEB.Entities;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.ViewModels.Orders;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Autopark.WEB.Controllers
 {
+
+    [Authorize(Roles = "admin, employee")]
     public class OrdersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

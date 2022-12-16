@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Autopark.DAL.EF;
 using Autopark.WEB.Entities;
 using Autopark.DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Autopark.WEB.Controllers
 {
+
+    [Authorize(Roles = "admin")]
     public class ManufacturersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -9,6 +9,7 @@ using Autopark.DAL.EF;
 using Autopark.WEB.Entities;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.ViewModels.Cars;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Autopark.WEB.Controllers
 {
@@ -20,6 +21,7 @@ namespace Autopark.WEB.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize(Roles ="admin, employee, customer")]
         // GET: Cars
         public IActionResult Index()
         {
@@ -32,6 +34,8 @@ namespace Autopark.WEB.Controllers
             }
             return View(carsViewModelList);
         }
+
+        [Authorize(Roles = "admin, employee, customer")]
 
         // GET: Cars/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -53,6 +57,8 @@ namespace Autopark.WEB.Controllers
             return View(idcvm);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: Cars/Create
         public IActionResult Create()
         {
@@ -65,6 +71,8 @@ namespace Autopark.WEB.Controllers
                 createCarsViewModel.Generations, "Id", "Title");
             return View();
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: Cars/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -88,6 +96,8 @@ namespace Autopark.WEB.Controllers
             return View(car);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: Cars/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -110,6 +120,8 @@ namespace Autopark.WEB.Controllers
                 updateCarViewModel.Generations, "Id", "Title", car.GenerationId);
             return View(car);
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: Cars/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -139,6 +151,8 @@ namespace Autopark.WEB.Controllers
             return View(car);
         }
 
+        [Authorize(Roles = "admin, employee")]
+
         // GET: Cars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -158,6 +172,8 @@ namespace Autopark.WEB.Controllers
 
             return View(deleteCarsViewModel);
         }
+
+        [Authorize(Roles = "admin, employee")]
 
         // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]
