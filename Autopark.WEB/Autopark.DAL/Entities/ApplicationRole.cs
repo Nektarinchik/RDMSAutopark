@@ -9,8 +9,6 @@ namespace Autopark.DAL.Entities
 {
     public class ApplicationRole : IdentityRole<int>
     {
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
         public ApplicationRole(string roleName) : 
             base(roleName)
         {

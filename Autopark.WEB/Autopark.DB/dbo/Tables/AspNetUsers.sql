@@ -15,7 +15,9 @@
     [LockoutEnabled]       BIT                NOT NULL,
     [AccessFailedCount]    INT                NOT NULL,
     [CustomerTypeId]       INT                NULL,
-    [SpendingBalance]      FLOAT (53)         NULL DEFAULT 0,
+    [SpendingBalance]      FLOAT (53)         NULL DEFAULT (0),
+    [EndDate]          DATETIME2 (7)  NULL,
+    [StartDate]        DATETIME2 (7)  NULL,
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_AspNetUsers_CustomerTypes_CustomerTypeId] FOREIGN KEY ([CustomerTypeId]) REFERENCES [dbo].[CustomerTypes] ([Id]) ON DELETE SET NULL
 );
