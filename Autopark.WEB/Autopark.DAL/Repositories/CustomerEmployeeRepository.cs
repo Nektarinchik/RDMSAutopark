@@ -1,5 +1,7 @@
-﻿using Autopark.DAL.Interfaces;
+﻿using Autopark.DAL.EF;
+using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,49 +12,47 @@ namespace Autopark.DAL.Repositories
 {
     public class CustomerEmployeeRepository : ICustomerEmployeeRepository
     {
-        public void Create(CustomerEmployee entity)
+        private readonly RdbmsdbContext _context;
+        public CustomerEmployeeRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public void Delete(int id)
+        public async Task Create(CustomerEmployee entity)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC InsertCustomerEmployee {entity.CustomerId}, {entity.EmployeeId}");
+        }
+
+        public async Task Delete(int customerId, int employeeId)
+        {
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteCustomerEmployee {customerId}, {employeeId}");
         }
 
         public IEnumerable<CustomerEmployee> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.CustomerEmployees.FromSqlRaw(
+                "SELECT * FROM [dbo].[CustomerEmployee]");
         }
 
-        public Task<CustomerEmployee?> GetByIdAsync(int id)
+        public Task<CustomerEmployee?> GetByIdAsync(int customerId, int employeeId)
         {
-            throw new NotImplementedException();
+            return _context.CustomerEmployees.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[CustomerEmployee]
+                WHERE CustomerId = {customerId} AND EmployeeId = {employeeId}").
+                FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(CustomerEmployee entity)
+        public async Task Update(CustomerEmployee entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<CustomerEmployee>.Create(CustomerEmployee entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<CustomerEmployee>.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<CustomerEmployee>.Update(CustomerEmployee entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC UpdateCustomerEmployee {entity.Id}, {entity.CustomerId}, {entity.EmployeeId}");
         }
     }
 }

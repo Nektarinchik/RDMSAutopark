@@ -1,53 +1,54 @@
-﻿using Autopark.DAL.Interfaces;
+﻿using Autopark.DAL.EF;
+using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.Repositories
 {
     public class OrdersRepository : IOrdersRepository
     {
-        public void Create(Order entity)
+        private readonly RdbmsdbContext _context;
+        public OrdersRepository(RdbmsdbContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public IEnumerable<Order> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Orders.FromSqlRaw(
+                "SELECT * FROM [dbo].[Orders]");
         }
 
         public Task<Order?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.Orders.FromSqlInterpolated(
+                $@"SELECT * FROM [dbo].[Orders]
+                WHERE Id = {id}").FirstOrDefaultAsync();
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Order entity)
+        public async Task Create(Order entity)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC InsertOrder {entity.CustomerEmployeeId}, 
+                {entity.DiscountId}, {entity.CarId}");
         }
 
-        Task IRepository<Order>.Create(Order entity)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC DeleteOrder {id}");
         }
 
-        Task IRepository<Order>.Delete(int id)
+        public async Task Update(Order entity)
         {
-            throw new NotImplementedException();
-        }
-
-        Task IRepository<Order>.Update(Order entity)
-        {
-            throw new NotImplementedException();
+            await _context.Database.ExecuteSqlInterpolatedAsync(
+                $@"EXEC UpdateOrder {entity.Id}, {entity.CustomerEmployeeId}, 
+                {entity.DiscountId}, {entity.CarId}, {entity.Date}");
         }
     }
 }
