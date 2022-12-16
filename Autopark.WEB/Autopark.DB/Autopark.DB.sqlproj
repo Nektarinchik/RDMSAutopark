@@ -78,6 +78,7 @@
     <Folder Include="dbo\Triggers\Generations" />
     <Folder Include="dbo\Triggers\Models" />
     <Folder Include="dbo\Triggers\Orders" />
+    <Folder Include="dbo\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
@@ -149,6 +150,9 @@
     <Build Include="dbo\Triggers\Orders\Orders_DELETE.sql" />
     <Build Include="dbo\Triggers\Orders\Orders_INSERT.sql" />
     <Build Include="dbo\Triggers\Orders\Orders_UPDATE.sql" />
+    <Build Include="dbo\Views\vEmployees_1.sql" />
+    <Build Include="dbo\Views\vCustomers_1.sql" />
+    <Build Include="dbo\Views\vCars_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Logs.sql" />
