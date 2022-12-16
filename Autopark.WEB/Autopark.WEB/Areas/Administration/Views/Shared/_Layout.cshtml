@@ -20,22 +20,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Manufacturers" asp-action="Index">Manufacturers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CarShowrooms" asp-action="Index">Car Showrooms</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Models" asp-action="Index">Models</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Generations" asp-action="Index">Generations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Employee" asp-controller="Home" asp-action="Index">Employee Administration</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="CarTypes" asp-action="Index">CarTypes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Administration</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Logs" asp-action="Index">Logs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="CustomerTypes" asp-action="Index">Customer Types</a>
                         </li>
                         <partial name="_LoginPartial" />
                     </ul>

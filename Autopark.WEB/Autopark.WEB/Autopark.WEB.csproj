@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Employee\Data\" />
     <Folder Include="Areas\Employee\Models\" />
     <Folder Include="Areas\Identity\Data\" />

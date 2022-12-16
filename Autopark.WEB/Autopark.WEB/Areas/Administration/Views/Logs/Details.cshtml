@@ -1,0 +1,35 @@
+﻿@model Autopark.WEB.Entities.Log
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Log</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LogMessage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LogMessage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerUser)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewData["UserName"]
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-area="Administration" asp-controller="Logs" asp-action="Index">Back to List</a>
+</div>
