@@ -11,5 +11,13 @@ namespace Autopark.DAL.Entities
     {
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public ApplicationRole(string roleName) : 
+            base(roleName)
+        {
+        }
+
+        public ApplicationRole()
+        {
+        }
     }
 }

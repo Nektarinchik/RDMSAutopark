@@ -4,6 +4,7 @@ using Autopark.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Autopark.DAL.Entities;
+using Autopark.WEB.DbInitialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") 
@@ -52,6 +53,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    await RoleInitializer.InitializeAsync(userManager, roleManager);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
