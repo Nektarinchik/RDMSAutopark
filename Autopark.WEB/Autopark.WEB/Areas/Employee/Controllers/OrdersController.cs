@@ -11,9 +11,10 @@ using Autopark.DAL.Interfaces;
 using Autopark.WEB.ViewModels.Orders;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Autopark.WEB.Controllers
+namespace Autopark.WEB.Areas.Employee.Controllers
 {
 
+    [Area("Employee")]
     [Authorize(Roles = "admin, employee")]
     public class OrdersController : Controller
     {
@@ -88,7 +89,7 @@ namespace Autopark.WEB.Controllers
                 await _unitOfWork.OrdersRepository.Create(
                     new Order
                     {
-                        CustomerEmployeeId = (customerEmployee == null ? null : customerEmployee.Id),
+                        CustomerEmployeeId = customerEmployee == null ? null : customerEmployee.Id,
                         DiscountId = order.DiscountId,
                         CarId = order.CarId
                     });

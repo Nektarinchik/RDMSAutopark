@@ -10,8 +10,9 @@ using Autopark.WEB.Entities;
 using Autopark.DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Autopark.WEB.Controllers
+namespace Autopark.WEB.Areas.Employee.Controllers
 {
+    [Area("Employee")]
     [Authorize(Roles = "admin, employee")]
     public class DiscountsController : Controller
     {
@@ -25,7 +26,7 @@ namespace Autopark.WEB.Controllers
         // GET: Discounts
         public async Task<IActionResult> Index()
         {
-              return View(_unitOfWork.DiscountsRepository.GetAll());
+            return View(_unitOfWork.DiscountsRepository.GetAll());
         }
 
         // GET: Discounts/Details/5
@@ -131,7 +132,7 @@ namespace Autopark.WEB.Controllers
             {
                 await _unitOfWork.DiscountsRepository.Delete(id);
             }
-            
+
             return RedirectToAction(nameof(Index));
         }
 
