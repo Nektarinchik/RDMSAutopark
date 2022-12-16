@@ -13,7 +13,6 @@ public partial class CustomerEmployee
     public int CustomerId { get; set; }
 
     public virtual ApplicationUser Customer { get; set; } = null!;
-
     public virtual ApplicationUser Employee { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; } = new List<Order>();

@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autopark.DAL.Migrations
 {
     [DbContext(typeof(RdbmsdbContext))]
-    [Migration("20221214084334_TestMigration")]
-    partial class TestMigration
+    [Migration("20221216160807_RemoveApplicationUserIdFieldFromCustomerEmployeeTable")]
+    partial class RemoveApplicationUserIdFieldFromCustomerEmployeeTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS")
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -77,7 +77,6 @@ namespace Autopark.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CustomerTypeId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -136,6 +135,42 @@ namespace Autopark.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Autopark.DAL.Entities.VCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("vCars");
+                });
+
+            modelBuilder.Entity("Autopark.DAL.Entities.VCustomer", b =>
+                {
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.ToView("vCustomers");
+                });
+
+            modelBuilder.Entity("Autopark.DAL.Entities.VEmployee", b =>
+                {
+                    b.Property<string>("EmployeeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.ToView("vEmployees");
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Car", b =>
@@ -524,8 +559,7 @@ namespace Autopark.DAL.Migrations
                 {
                     b.HasOne("Autopark.WEB.Entities.CustomerType", "CustomerType")
                         .WithMany("Users")
-                        .HasForeignKey("CustomerTypeId")
-                        .IsRequired();
+                        .HasForeignKey("CustomerTypeId");
 
                     b.Navigation("CustomerType");
                 });

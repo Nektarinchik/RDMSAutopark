@@ -30,6 +30,7 @@ builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository
 builder.Services.AddScoped<IVCarsRepository, VCarsRepository>();
 builder.Services.AddScoped<IVCustomersRepository, VCustomersRepository>();
 builder.Services.AddScoped<IVEmployeesRepository, VEmployeesRepository>();
+builder.Services.AddScoped<IVOrdersRepository, VOrdersRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(

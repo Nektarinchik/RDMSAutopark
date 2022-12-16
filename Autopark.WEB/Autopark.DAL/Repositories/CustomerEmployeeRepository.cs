@@ -2,6 +2,7 @@
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
 using Microsoft.EntityFrameworkCore;
+using Autopark.DAL.IEnumerableExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +41,8 @@ namespace Autopark.DAL.Repositories
         {
             return _context.CustomerEmployees.FromSqlInterpolated(
                 $@"SELECT * FROM [dbo].[CustomerEmployee]
-                WHERE CustomerId = {customerId} AND EmployeeId = {employeeId}").
-                FirstOrDefaultAsync();
+                WHERE CustomerId = {customerId} AND EmployeeId = {employeeId}")
+                .FirstOrDefaultAsync();
         }
 
         public async Task SaveAsync()

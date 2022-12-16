@@ -157,6 +157,7 @@
     <Build Include="dbo\Stored Procedures\CustomerEmployee\InsertCustomerEmployee.sql" />
     <Build Include="dbo\Stored Procedures\CustomerEmployee\UpdateCustomerEmployee.sql" />
     <Build Include="dbo\Stored Procedures\CustomerEmployee\DeleteCustomerEmployee.sql" />
+    <Build Include="dbo\Views\VOrders.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Logs.sql" />

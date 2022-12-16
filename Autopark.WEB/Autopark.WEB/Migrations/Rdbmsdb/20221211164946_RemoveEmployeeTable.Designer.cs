@@ -228,8 +228,8 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ApplicationUserId")
-                        .HasColumnType("int");
+                    //b.Property<int?>("ApplicationUserId")
+                    //    .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -240,7 +240,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
                     b.HasKey("Id")
                         .HasName("PK_CustomerEmployee_Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    //b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CustomerId");
 
@@ -557,9 +557,9 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Autopark.WEB.Entities.CustomerEmployee", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
-                        .WithMany("CustomerEmployees")
-                        .HasForeignKey("ApplicationUserId");
+                    //b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
+                    //    .WithMany("CustomerEmployees")
+                    //    .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Autopark.DAL.Entities.ApplicationUser", "Customer")
                         .WithMany("CustomerEmployees1")
@@ -689,7 +689,7 @@ namespace Autopark.WEB.Migrations.Rdbmsdb
 
             modelBuilder.Entity("Autopark.DAL.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("CustomerEmployees");
+                    //b.Navigation("CustomerEmployees");
 
                     b.Navigation("CustomerEmployees1");
 

@@ -34,6 +34,7 @@ namespace Autopark.DAL.EF
         public virtual DbSet<VCar> VCars { get; set; }
         public virtual DbSet<VCustomer> VCustomers { get; set; }
         public virtual DbSet<VEmployee> VEmployees { get; set; }
+        public virtual DbSet<VOrder> VOrders { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -63,6 +64,12 @@ namespace Autopark.DAL.EF
             {
                 entity.HasNoKey();
                 entity.ToView("vEmployees");
+            });
+
+            modelBuilder.Entity<VOrder>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("vOrders");
             });
 
             modelBuilder.Entity<Car>(entity =>

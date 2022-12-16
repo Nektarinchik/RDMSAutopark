@@ -23,6 +23,7 @@ namespace Autopark.DAL.Interfaces
         public IVCarsRepository VCarsRepository { get; set; }
         public IVCustomersRepository VCustomersRepository { get; set; }
         public IVEmployeesRepository VEmployeesRepository { get; set; }
+        public IVOrdersRepository VOrdersRepository { get; set; }
         public Task SaveAsync();
     }
 }

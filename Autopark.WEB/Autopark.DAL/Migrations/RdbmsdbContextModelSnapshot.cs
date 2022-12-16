@@ -18,7 +18,7 @@ namespace Autopark.DAL.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("SQL_Latin1_General_CP1_CI_AS")
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -75,7 +75,6 @@ namespace Autopark.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CustomerTypeId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -136,6 +135,42 @@ namespace Autopark.DAL.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Autopark.DAL.Entities.VCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToView("vCars");
+                });
+
+            modelBuilder.Entity("Autopark.DAL.Entities.VCustomer", b =>
+                {
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.ToView("vCustomers");
+                });
+
+            modelBuilder.Entity("Autopark.DAL.Entities.VEmployee", b =>
+                {
+                    b.Property<string>("EmployeeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.ToView("vEmployees");
+                });
+
             modelBuilder.Entity("Autopark.WEB.Entities.Car", b =>
                 {
                     b.Property<int>("Id")
@@ -169,7 +204,7 @@ namespace Autopark.DAL.Migrations
 
                     b.HasIndex("GenerationId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.CarShowroom", b =>
@@ -196,7 +231,7 @@ namespace Autopark.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_CarShowrooms_Id");
 
-                    b.ToTable("CarShowrooms");
+                    b.ToTable("CarShowrooms", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.CarType", b =>
@@ -215,7 +250,7 @@ namespace Autopark.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_CarTypes_Id");
 
-                    b.ToTable("CarTypes");
+                    b.ToTable("CarTypes", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.CustomerEmployee", b =>
@@ -226,9 +261,6 @@ namespace Autopark.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ApplicationUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -237,8 +269,6 @@ namespace Autopark.DAL.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_CustomerEmployee_Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CustomerId");
 
@@ -264,7 +294,7 @@ namespace Autopark.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_CustomerTypes_Id");
 
-                    b.ToTable("CustomerTypes");
+                    b.ToTable("CustomerTypes", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Discount", b =>
@@ -286,7 +316,7 @@ namespace Autopark.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Discounts_Id");
 
-                    b.ToTable("Discounts");
+                    b.ToTable("Discounts", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Generation", b =>
@@ -310,7 +340,7 @@ namespace Autopark.DAL.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("Generations");
+                    b.ToTable("Generations", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Log", b =>
@@ -337,7 +367,7 @@ namespace Autopark.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Logs");
+                    b.ToTable("Logs", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Manufacturer", b =>
@@ -356,7 +386,7 @@ namespace Autopark.DAL.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Manufacturers_Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturers", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Model", b =>
@@ -380,7 +410,7 @@ namespace Autopark.DAL.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("Models");
+                    b.ToTable("Models", (string)null);
                 });
 
             modelBuilder.Entity("Autopark.WEB.Entities.Order", b =>
@@ -412,7 +442,7 @@ namespace Autopark.DAL.Migrations
 
                     b.HasIndex("DiscountId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -522,8 +552,7 @@ namespace Autopark.DAL.Migrations
                 {
                     b.HasOne("Autopark.WEB.Entities.CustomerType", "CustomerType")
                         .WithMany("Users")
-                        .HasForeignKey("CustomerTypeId")
-                        .IsRequired();
+                        .HasForeignKey("CustomerTypeId");
 
                     b.Navigation("CustomerType");
                 });
@@ -555,10 +584,6 @@ namespace Autopark.DAL.Migrations
 
             modelBuilder.Entity("Autopark.WEB.Entities.CustomerEmployee", b =>
                 {
-                    b.HasOne("Autopark.DAL.Entities.ApplicationUser", null)
-                        .WithMany("CustomerEmployees")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("Autopark.DAL.Entities.ApplicationUser", "Customer")
                         .WithMany("CustomerEmployees1")
                         .HasForeignKey("CustomerId")
@@ -687,8 +712,6 @@ namespace Autopark.DAL.Migrations
 
             modelBuilder.Entity("Autopark.DAL.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("CustomerEmployees");
-
                     b.Navigation("CustomerEmployees1");
 
                     b.Navigation("CustomerEmployees2");
