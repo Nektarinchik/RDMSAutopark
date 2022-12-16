@@ -29,6 +29,7 @@ namespace Autopark.DAL.Repositories
         public virtual ICarTypesRepository CarTypesRepository { get; set; }
 
         public virtual IApplicationUserRepository ApplicationUserRepository { get; set; }
+        public virtual IVCarsRepository VCarsRepository { get; set; }
         public UnitOfWork(RdbmsdbContext context,
             ICarShowroomsRepository carShowroomsRepository,
             ICarsRepository carsRepository,
@@ -41,7 +42,8 @@ namespace Autopark.DAL.Repositories
             IModelsRepository modelsRepository,
             IOrdersRepository ordersRepository,
             ICarTypesRepository carTypesRepository,
-            IApplicationUserRepository applicationUserRepository)
+            IApplicationUserRepository applicationUserRepository,
+            IVCarsRepository vCarsRepository)
         {
             _context = context;
 
@@ -57,6 +59,7 @@ namespace Autopark.DAL.Repositories
             ManufacturersRepository = manufacturersRepository;
             CarTypesRepository = carTypesRepository;
             ApplicationUserRepository = applicationUserRepository;
+            VCarsRepository = vCarsRepository;
         }
 
         public virtual void Dispose()

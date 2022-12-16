@@ -1,4 +1,5 @@
-﻿using Autopark.WEB.Entities;
+﻿using Autopark.DAL.Entities;
+using Autopark.WEB.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Autopark.DAL.EF
@@ -15,8 +16,6 @@ namespace Autopark.DAL.EF
 
         public virtual DbSet<CarType> CarTypes { get; set; }
 
-        //public virtual DbSet<Customer> Customers { get; set; }
-
         public virtual DbSet<CustomerEmployee> CustomerEmployees { get; set; }
 
         public virtual DbSet<CustomerType> CustomerTypes { get; set; }
@@ -32,6 +31,7 @@ namespace Autopark.DAL.EF
         public virtual DbSet<Model> Models { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<VCar> VCars { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -44,6 +44,12 @@ namespace Autopark.DAL.EF
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<VCar>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("vCars");
+            });
 
             modelBuilder.Entity<Car>(entity =>
             {

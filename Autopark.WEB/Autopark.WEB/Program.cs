@@ -27,6 +27,7 @@ builder.Services.AddScoped<IModelsRepository, ModelsRepository>();
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 builder.Services.AddScoped<ICarTypesRepository, CarTypesRepository>();
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddScoped<IVCarsRepository, VCarsRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(
