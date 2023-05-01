@@ -58,8 +58,6 @@ namespace Autopark.WEB.Areas.Employee.Controllers
                 _unitOfWork.VCustomersRepository.GetAll(), "Id", "CustomerName");
             ViewData["EmployeeId"] = new SelectList(
                 _unitOfWork.VEmployeesRepository.GetAll(), "Id", "EmployeeName");
-            ViewData["DiscountId"] = new SelectList(
-                _unitOfWork.DiscountsRepository.GetAll(), "Id", "Title");
             return View();
         }
 
@@ -68,7 +66,7 @@ namespace Autopark.WEB.Areas.Employee.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,EmployeeId,DiscountId,CarId")] OrderViewModel order)
+        public async Task<IActionResult> Create([Bind("CustomerId,EmployeeId,CarId")] OrderViewModel order)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +88,6 @@ namespace Autopark.WEB.Areas.Employee.Controllers
                     new Order
                     {
                         CustomerEmployeeId = customerEmployee == null ? null : customerEmployee.Id,
-                        DiscountId = order.DiscountId,
                         CarId = order.CarId
                     });
                 return RedirectToAction(nameof(Index));
@@ -101,8 +98,6 @@ namespace Autopark.WEB.Areas.Employee.Controllers
                 _unitOfWork.VCustomersRepository.GetAll(), "Id", "CustomerName", order.CustomerId);
             ViewData["EmployeeId"] = new SelectList(
                 _unitOfWork.VEmployeesRepository.GetAll(), "Id", "EmployeeName", order.EmployeeId);
-            ViewData["DiscountId"] = new SelectList(
-                _unitOfWork.DiscountsRepository.GetAll(), "Id", "Title", order.DiscountId);
             return View(order);
         }
     }

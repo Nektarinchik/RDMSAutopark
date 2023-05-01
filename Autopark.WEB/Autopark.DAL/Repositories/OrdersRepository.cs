@@ -35,7 +35,7 @@ namespace Autopark.DAL.Repositories
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
                 $@"EXEC InsertOrder {entity.CustomerEmployeeId}, 
-                {entity.DiscountId}, {entity.CarId}");
+                {entity.CarId}");
         }
 
         public async Task Delete(int id)

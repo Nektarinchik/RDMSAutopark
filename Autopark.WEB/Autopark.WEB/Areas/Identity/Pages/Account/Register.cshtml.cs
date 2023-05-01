@@ -128,6 +128,7 @@ namespace Autopark.WEB.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.SpendingBalance = 0;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 user.CustomerType = await _context.CustomerTypes.

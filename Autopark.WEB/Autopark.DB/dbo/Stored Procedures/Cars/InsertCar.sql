@@ -3,10 +3,11 @@
 	@CarShowroomId INT,
 	@GenerationId  INT,
 	@Price         FLOAT,
-	@Vin           NVARCHAR(17)
+	@Vin           NVARCHAR(17),
+	@Image         VARBINARY(MAX) = NULL
 AS
 BEGIN
 	INSERT INTO [dbo].[Cars]
-	(CarTypeId, CarShowroomid, GenerationId, Price, Vin)
-	VALUES(@CarTypeId, @CarShowroomId, @GenerationId, @Price, @Vin);
+	(CarTypeId, CarShowroomid, GenerationId, Price, Vin, Image)
+	VALUES(@CarTypeId, @CarShowroomId, @GenerationId, @Price, @Vin, CONVERT(varbinary(max), @Image));
 END

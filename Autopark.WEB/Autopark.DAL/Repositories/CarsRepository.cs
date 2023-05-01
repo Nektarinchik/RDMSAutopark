@@ -1,9 +1,11 @@
 ﻿using Autopark.DAL.EF;
 using Autopark.DAL.Interfaces;
 using Autopark.WEB.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +21,32 @@ namespace Autopark.DAL.Repositories
         }
         public async Task Create(Car entity)
         {
-            await _context.Database.ExecuteSqlInterpolatedAsync(
-                $@"EXEC InsertCar 
-                {entity.CarTypeId}, {entity.CarShowroomId}, 
-                {entity.GenerationId}, {entity.Price}, {entity.Vin}");
+			using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+			{
+				connection.Open();
+				using (var cmd = new SqlCommand("InsertCar", connection))
+				{
+					cmd.CommandType = CommandType.StoredProcedure;
+
+					cmd.Parameters.AddWithValue("@CarTypeId", entity.CarTypeId);
+					cmd.Parameters.AddWithValue("@CarShowroomId", entity.CarShowroomId);
+					cmd.Parameters.AddWithValue("@GenerationId", entity.GenerationId);
+					cmd.Parameters.AddWithValue("@Price", entity.Price);
+					cmd.Parameters.AddWithValue("@Vin", entity.Vin);
+
+					if (entity.Image != null)
+					{
+						cmd.Parameters.AddWithValue("@Image", entity.Image);
+					}
+
+					cmd.ExecuteNonQuery();
+				}
+			}
+
+			//await _context.Database.ExecuteSqlInterpolatedAsync(
+   //             $@"EXEC InsertCar 
+   //             {entity.CarTypeId}, {entity.CarShowroomId}, 
+   //             {entity.GenerationId}, {entity.Price}, {entity.Vin}, {entity?.Image?.ToString() ?? "NULL"}");
         }
 
         public async Task Delete(int id)
@@ -52,10 +76,33 @@ namespace Autopark.DAL.Repositories
 
         public async Task Update(Car entity)
         {
-            _ = await _context.Database.ExecuteSqlInterpolatedAsync(
-                $@"EXEC UpdateCar 
-                {entity.Id}, {entity.CarTypeId}, {entity.CarShowroomId},
-                {entity.GenerationId}, {entity.Price}, {entity.Vin}");
+			using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
+			{
+				connection.Open();
+				using (var cmd = new SqlCommand("UpdateCar", connection))
+				{
+					cmd.CommandType = CommandType.StoredProcedure;
+
+					cmd.Parameters.AddWithValue("@Id", entity.Id);
+					cmd.Parameters.AddWithValue("@CarTypeId", entity.CarTypeId);
+					cmd.Parameters.AddWithValue("@CarShowroomId", entity.CarShowroomId);
+					cmd.Parameters.AddWithValue("@GenerationId", entity.GenerationId);
+					cmd.Parameters.AddWithValue("@Price", entity.Price);
+					cmd.Parameters.AddWithValue("@Vin", entity.Vin);
+
+					if (entity.Image != null)
+					{
+						cmd.Parameters.AddWithValue("@Image", entity.Image);
+					}
+
+					cmd.ExecuteNonQuery();
+				}
+			}
+
+			//_ = await _context.Database.ExecuteSqlInterpolatedAsync(
+   //             $@"EXEC UpdateCar 
+   //             {entity.Id}, {entity.CarTypeId}, {entity.CarShowroomId},
+   //             {entity.GenerationId}, {entity.Price}, {entity.Vin}, {entity.Image}");
         }
     }
 }

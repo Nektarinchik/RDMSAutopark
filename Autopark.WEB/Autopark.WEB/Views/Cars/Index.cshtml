@@ -1,72 +1,88 @@
 ﻿@model IEnumerable<Autopark.WEB.Entities.Car>
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+	<a asp-action="Create">Create New</a>
 </p>
+<style>
+	.car-index-cell-element{
+		text-align: center;
+		vertical-align: middle;
+	}
+</style>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Generation.Model.Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Generation.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Generation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarShowroom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarType)
-            </th>
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Image)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Generation.Model.Manufacturer)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Generation.Model)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Generation)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Price)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Vin)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CarShowroom)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CarType)
+			</th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Generation.Model.Manufacturer.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Generation.Model.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Generation.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarShowroom.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarType.Title)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td class="car-index-cell-element" width="20%">
+					@if (!(item.Image is null))
+					{
+						<img src="data:image/png;base64,@(Convert.ToBase64String(item.Image ))" width="100%" />
+					}
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.Generation.Model.Manufacturer.Title)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.Generation.Model.Title)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.Generation.Title)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.Vin)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.CarShowroom.Title)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.CarType.Title)
+				</td>
+				<td class="car-index-cell-element">
+					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>

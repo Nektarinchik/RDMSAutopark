@@ -22,4 +22,5 @@ public partial class Car
     public virtual Generation? Generation { get; set; }
 
     public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public virtual byte[]? Image { get; set; }
 }

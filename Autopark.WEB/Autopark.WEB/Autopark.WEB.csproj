@@ -27,7 +27,6 @@
     <Folder Include="Areas\Employee\Data\" />
     <Folder Include="Areas\Employee\Models\" />
     <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="Contexts\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

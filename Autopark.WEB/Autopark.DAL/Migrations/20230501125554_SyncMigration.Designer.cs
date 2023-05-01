@@ -4,6 +4,7 @@ using Autopark.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autopark.DAL.Migrations
 {
     [DbContext(typeof(RdbmsdbContext))]
-    partial class RdbmsdbContextModelSnapshot : ModelSnapshot
+    [Migration("20230501125554_SyncMigration")]
+    partial class SyncMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,9 +212,6 @@ namespace Autopark.DAL.Migrations
 
                     b.Property<int>("GenerationId")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<double?>("Price")
                         .HasColumnType("float");

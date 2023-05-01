@@ -63,11 +63,11 @@ namespace Autopark.WEB.Controllers
         public IActionResult Create()
         {
             CreateUpdateCarsViewModel createCarsViewModel = new CreateUpdateCarsViewModel(_unitOfWork);
-            ViewData["CarShowroomId"] = new SelectList(
+            ViewBag.CarShowroomId = new SelectList(
                 createCarsViewModel.CarShowrooms, "Id", "Title");
-            ViewData["CarTypeId"] = new SelectList(
+			ViewBag.CarTypeId = new SelectList(
                 createCarsViewModel.CarTypes, "Id", "Title");
-            ViewData["GenerationId"] = new SelectList(
+			ViewBag.GenerationId = new SelectList(
                 createCarsViewModel.Generations, "Id", "Title");
             return View();
         }
@@ -79,10 +79,18 @@ namespace Autopark.WEB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car)
+        public async Task<IActionResult> Create([Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car,[FromForm(Name = "image")] IFormFile? image)
         {
-            if (ModelState.IsValid)
+			if (ModelState.IsValid)
             {
+                if (image != null && image.Length > 0)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await image.CopyToAsync(stream);
+                        car.Image = stream.ToArray();
+                    }
+                }
                 await _unitOfWork.CarsRepository.Create(car);
                 return RedirectToAction(nameof(Index));
             }
@@ -128,7 +136,7 @@ namespace Autopark.WEB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car,[FromForm(Name = "image")] IFormFile? image)
         {
             if (id != car.Id)
             {
@@ -137,7 +145,15 @@ namespace Autopark.WEB.Controllers
 
             if (ModelState.IsValid)
             {
-                await _unitOfWork.CarsRepository.Update(car);
+				if (image != null && image.Length > 0)
+				{
+					using (var stream = new MemoryStream())
+					{
+						await image.CopyToAsync(stream);
+						car.Image = stream.ToArray();
+					}
+				}
+				await _unitOfWork.CarsRepository.Update(car);
                 return RedirectToAction(nameof(Index));
             }
 

@@ -4,7 +4,8 @@
 	@CarShowroomId INT,
 	@GenerationId  INT,
 	@Price         FLOAT,
-	@Vin           NVARCHAR(17)
+	@Vin           NVARCHAR(17),
+	@Image         VARBINARY(MAX) = NULL
 AS
 BEGIN
 	UPDATE [dbo].[Cars]
@@ -12,6 +13,7 @@ BEGIN
 		CarShowroomId = @CarShowroomId,
 		GenerationId  = @GenerationId,
 		Price         = @Price,
-		Vin           = @Vin
+		Vin           = @Vin,
+		Image         = CONVERT(varbinary(max), @Image)
 	WHERE Id = @Id;
 END
