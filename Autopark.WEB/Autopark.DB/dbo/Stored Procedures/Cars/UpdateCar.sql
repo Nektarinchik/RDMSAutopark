@@ -5,7 +5,8 @@
 	@GenerationId  INT,
 	@Price         FLOAT,
 	@Vin           NVARCHAR(17),
-	@Image         VARBINARY(MAX) = NULL
+	@Image         VARBINARY(MAX) = NULL,
+	@YearOfRelease DATETIME2(7) = NULL
 AS
 BEGIN
 	UPDATE [dbo].[Cars]
@@ -14,6 +15,7 @@ BEGIN
 		GenerationId  = @GenerationId,
 		Price         = @Price,
 		Vin           = @Vin,
-		Image         = CONVERT(varbinary(max), @Image)
+		Image         = CONVERT(varbinary(max), @Image),
+		YearOfRelease = @YearOfRelease
 	WHERE Id = @Id;
 END

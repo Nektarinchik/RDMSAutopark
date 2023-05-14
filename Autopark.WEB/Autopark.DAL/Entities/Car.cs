@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Xml;
 
 namespace Autopark.WEB.Entities;
 
@@ -15,6 +17,9 @@ public partial class Car
 
     public double? Price { get; set; }
     public string Vin { get; set; } = null!;
+
+	[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+	public virtual DateTime? YearOfRelease { get; set; }
     public virtual CarShowroom? CarShowroom { get; set; }
 
     public virtual CarType? CarType { get; set; }

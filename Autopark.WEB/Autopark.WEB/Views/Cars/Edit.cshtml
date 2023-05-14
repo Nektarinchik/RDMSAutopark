@@ -39,6 +39,11 @@
 				<span asp-validation-for="Vin" class="text-danger"></span>
 			</div>
 			<div class="form-group">
+				<label asp-for="YearOfRelease" class="control-label"></label>
+				<input type="date" asp-for="YearOfRelease" class="form-control" />
+				<span asp-validation-for="YearOfRelease" class="text-danger"></span>
+			</div>
+			<div class="form-group">
 				<label for="image" class="control-label">Image</label>
 				<input type="file" id="car-image" name="image" />
 			</div>

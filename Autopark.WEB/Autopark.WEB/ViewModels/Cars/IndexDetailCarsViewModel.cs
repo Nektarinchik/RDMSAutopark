@@ -24,7 +24,9 @@ namespace Autopark.WEB.ViewModels.Cars
             set => base.CarShowroom = value;
         }
         public override byte[]? Image { get => _car.Image; set => _car.Image = value; }
-        public override CarType? CarType
+
+		public override DateTime? YearOfRelease { get => _car.YearOfRelease; set => _car.YearOfRelease = value; }
+		public override CarType? CarType
         {
             get
             {

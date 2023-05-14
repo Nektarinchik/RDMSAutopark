@@ -79,7 +79,7 @@ namespace Autopark.WEB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car,[FromForm(Name = "image")] IFormFile? image)
+        public async Task<IActionResult> Create([Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin,YearOfRelease")] Car car,[FromForm(Name = "image")] IFormFile? image)
         {
 			if (ModelState.IsValid)
             {
@@ -136,7 +136,7 @@ namespace Autopark.WEB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin")] Car car,[FromForm(Name = "image")] IFormFile? image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CarTypeId,CarShowroomId,GenerationId,Price,Vin,YearOfRelease")] Car car,[FromForm(Name = "image")] IFormFile? image)
         {
             if (id != car.Id)
             {

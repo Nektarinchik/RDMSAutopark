@@ -4,6 +4,7 @@ using Autopark.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Autopark.DAL.Migrations
 {
     [DbContext(typeof(RdbmsdbContext))]
-    partial class RdbmsdbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514125305_Adding YearOfRelease column in Car entity")]
+    partial class AddingYearOfReleasecolumninCarentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

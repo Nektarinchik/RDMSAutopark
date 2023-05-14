@@ -10,7 +10,7 @@
 	<a asp-action="Create">Create New</a>
 </p>
 <style>
-	.car-index-cell-element{
+	.car-index-cell-element {
 		text-align: center;
 		vertical-align: middle;
 	}
@@ -35,6 +35,9 @@
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.Vin)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.YearOfRelease)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.CarShowroom)
@@ -70,6 +73,9 @@
 				</td>
 				<td class="car-index-cell-element">
 					@Html.DisplayFor(modelItem => item.Vin)
+				</td>
+				<td class="car-index-cell-element">
+					@Html.DisplayFor(modelItem => item.YearOfRelease)
 				</td>
 				<td class="car-index-cell-element">
 					@Html.DisplayFor(modelItem => item.CarShowroom.Title)

@@ -38,6 +38,7 @@ namespace Autopark.DAL.Repositories
 					{
 						cmd.Parameters.AddWithValue("@Image", entity.Image);
 					}
+					cmd.Parameters.AddWithValue("@YearOfRelease", entity.YearOfRelease);
 
 					cmd.ExecuteNonQuery();
 				}
@@ -94,6 +95,8 @@ namespace Autopark.DAL.Repositories
 					{
 						cmd.Parameters.AddWithValue("@Image", entity.Image);
 					}
+
+					cmd.Parameters.AddWithValue("@YearOfRelease", entity.YearOfRelease);
 
 					cmd.ExecuteNonQuery();
 				}
