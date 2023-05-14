@@ -1,4 +1,4 @@
-﻿CREATE TRIGGER [Orders_INSERT]
+﻿CREATE TRIGGER [dbo].[Orders_INSERT]
 ON [dbo].[Orders]
 AFTER INSERT
 AS
@@ -60,13 +60,20 @@ BEGIN
 		)
 	);
 
+	DECLARE @discountCoeff FLOAT;
+
+	SET @discountCoeff = (
+		SELECT [dbo].[Discounts].[Value] FROM Discounts
+		WHERE Id = (
+			SELECT DiscountId FROM INSERTED)) / 100.0;
+
 	UPDATE [dbo].[AspNetUsers]
-	SET SpendingBalance = SpendingBalance + 
-		(SELECT [dbo].[Cars].[Price] 
-		FROM INSERTED
-			INNER JOIN [dbo].[Cars] ON INSERTED.CarId = [dbo].[Cars].[Id])
-	WHERE [dbo].[AspNetUsers].[Id] = 
-		(SELECT [dbo].[CustomerEmployee].[CustomerId]
-		FROM INSERTED 
-			INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id])
+		SET SpendingBalance = SpendingBalance + (SELECT (1 - @discountCoeff) * 
+			(SELECT [dbo].[Cars].[Price] 
+			FROM INSERTED
+				INNER JOIN [dbo].[Cars] ON INSERTED.CarId = [dbo].[Cars].[Id]))
+		WHERE [dbo].[AspNetUsers].[Id] = 
+			(SELECT [dbo].[CustomerEmployee].[CustomerId]
+			FROM INSERTED 
+				INNER JOIN [dbo].[CustomerEmployee] ON INSERTED.CustomerEmployeeId = [dbo].[CustomerEmployee].[Id])
 END

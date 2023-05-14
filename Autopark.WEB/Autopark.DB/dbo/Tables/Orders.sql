@@ -13,6 +13,10 @@
 
 
 
+
+
+
+
 GO
 CREATE NONCLUSTERED INDEX [IX_Orders_CarId]
     ON [dbo].[Orders]([CarId] ASC);

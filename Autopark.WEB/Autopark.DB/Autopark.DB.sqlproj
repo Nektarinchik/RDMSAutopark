@@ -149,7 +149,6 @@
     <Build Include="dbo\Triggers\Models\Models_UPDATE.sql" />
     <Build Include="dbo\Triggers\Models\Models_INSERT.sql" />
     <Build Include="dbo\Triggers\Models\Models_DELETE.sql" />
-    <Build Include="dbo\Triggers\Orders\Orders_DELETE.sql" />
     <Build Include="dbo\Triggers\Orders\Orders_INSERT.sql" />
     <Build Include="dbo\Triggers\Orders\Orders_UPDATE.sql" />
     <Build Include="dbo\Views\vEmployees.sql" />
